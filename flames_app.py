@@ -2,39 +2,63 @@ import streamlit as st
 
 # FLAMES calculation function
 def flames_game(name1, name2):
-    # Remove spaces and convert to lowercase
     name1 = name1.replace(" ", "").lower()
     name2 = name2.replace(" ", "").lower()
-    
-    # Remove common characters from both names
     for char in name1:
         if char in name2:
             name1 = name1.replace(char, '', 1)
             name2 = name2.replace(char, '', 1)
-    
-    # Count the total number of remaining characters
     count = len(name1) + len(name2)
-    
-    # FLAMES mapping to types of relationships
-    flames = ['Friends', 'Love', 'Affection', 'Marriage', 'Enemies', 'Siblings']
-    
-    # Determine the relationship using the remaining count
+    flames = ['❤️ Friends', '💘 Love', '💫 Affection', '💍 Marriage', '😠 Enemies', '👨‍👩‍👧 Siblings']
     while len(flames) > 1:
         index = count % len(flames) - 1
         if index >= 0:
-            right = flames[index + 1:]
-            left = flames[:index]
-            flames = right + left
+            flames = flames[index+1:] + flames[:index]
         else:
             flames = flames[:-1]
-
     return flames[0]
 
-# Title and description
-st.title('FLAMES Game')
-st.write('Find out what type of relationship exists between two names according to the classic FLAMES game.')
+# Custom Background and Style
+st.markdown(
+    """
+    <style>
+    .main {
+        background: url("https://wallpaperaccess.com/full/2593235.jpg");
+        background-size: cover;
+    }
+    .stButton button {
+        background-color: #ff69b4 !important;
+        color: white !important;
+        border-radius: 10px;
+        height: 50px;
+        width: 200px;
+        font-size: 16px;
+    }
+    .stTextInput>div>div>input {
+        border: 2px solid #ff69b4;
+        border-radius: 10px;
+        height: 40px;
+        font-size: 16px;
+    }
+    .stSuccess {
+        font-size: 24px !important;
+        color: white !important;
+        font-weight: bold;
+        background-color: #ff69b4;
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# Initialize session state variables
+# App title and instructions
+st.title("💖 FLAMES Game 💖")
+st.write("**Find out your special connection using the classic FLAMES game.**")
+
+# Session state management
 if 'name1' not in st.session_state:
     st.session_state.name1 = ""
 if 'name2' not in st.session_state:
@@ -43,15 +67,15 @@ if 'result' not in st.session_state:
     st.session_state.result = ""
 
 # Input fields
-st.session_state.name1 = st.text_input("Enter the first name:", st.session_state.name1)
-st.session_state.name2 = st.text_input("Enter the second name:", st.session_state.name2)
+st.session_state.name1 = st.text_input("💑 Enter the first name:", st.session_state.name1)
+st.session_state.name2 = st.text_input("💏 Enter the second name:", st.session_state.name2)
 
-# Calculate button
-if st.button('Calculate Relationship'):
+# Button to calculate relationship
+if st.button('💞 Calculate Relationship 💞'):
     if st.session_state.name1 and st.session_state.name2:
         st.session_state.result = flames_game(st.session_state.name1, st.session_state.name2)
-        st.success(f"The relationship between {st.session_state.name1} and {st.session_state.name2} is: {st.session_state.result}")
+        st.success(f"💖 The relationship between {st.session_state.name1} and {st.session_state.name2} is: {st.session_state.result}! 💖")
         
-        # Clear the names after showing the result
+        # Reset names for next entry
         st.session_state.name1 = ""
         st.session_state.name2 = ""
