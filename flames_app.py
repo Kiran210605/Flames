@@ -20,29 +20,29 @@ def flames_game(name1, name2):
 
 # Custom Background and Style
 st.markdown(
-    """
+    f"""
     <style>
-    .stApp {
-        background-image: url("https://wallpaperaccess.com/full/2593235.jpg");
+    .stApp {{
+        background-image: url("https://c1.wallpaperflare.com/preview/934/331/608/love-relationship-ice-fire.jpg");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-    }
-    .stButton button {
+    }}
+    .stButton button {{
         background-color: #ff69b4 !important;
         color: white !important;
         border-radius: 10px;
         height: 50px;
         width: 200px;
         font-size: 16px;
-    }
-    .stTextInput>div>div>input {
+    }}
+    .stTextInput>div>div>input {{
         border: 2px solid #ff69b4;
         border-radius: 10px;
         height: 40px;
         font-size: 16px;
-    }
-    .stSuccess {
+    }}
+    .stSuccess {{
         font-size: 24px !important;
         color: white !important;
         font-weight: bold;
@@ -50,7 +50,7 @@ st.markdown(
         border-radius: 10px;
         padding: 10px;
         text-align: center;
-    }
+    }}
     </style>
     """,
     unsafe_allow_html=True
