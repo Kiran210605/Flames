@@ -1,5 +1,6 @@
 import streamlit as st
 
+# FLAMES calculation function
 def flames_game(name1, name2):
     # Remove spaces and convert to lowercase
     name1 = name1.replace(" ", "").lower()
@@ -29,12 +30,28 @@ def flames_game(name1, name2):
 
     return flames[0]
 
+# Title and description
 st.title('FLAMES Game')
 st.write('Find out what type of relationship exists between two names according to the classic FLAMES game.')
 
-name1 = st.text_input("Enter the first name:")
-name2 = st.text_input("Enter the second name:")
+# Initialize session state variables
+if 'name1' not in st.session_state:
+    st.session_state.name1 = ""
+if 'name2' not in st.session_state:
+    st.session_state.name2 = ""
+if 'result' not in st.session_state:
+    st.session_state.result = ""
 
+# Input fields
+st.session_state.name1 = st.text_input("Enter the first name:", st.session_state.name1)
+st.session_state.name2 = st.text_input("Enter the second name:", st.session_state.name2)
+
+# Calculate button
 if st.button('Calculate Relationship'):
-    result = flames_game(name1, name2)
-    st.success(f"The relationship between {name1} and {name2} is: {result}")
+    if st.session_state.name1 and st.session_state.name2:
+        st.session_state.result = flames_game(st.session_state.name1, st.session_state.name2)
+        st.success(f"The relationship between {st.session_state.name1} and {st.session_state.name2} is: {st.session_state.result}")
+        
+        # Clear the names after showing the result
+        st.session_state.name1 = ""
+        st.session_state.name2 = ""
