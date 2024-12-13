@@ -22,9 +22,11 @@ def flames_game(name1, name2):
 st.markdown(
     """
     <style>
-    .main {
-        background: url("https://wallpaperaccess.com/full/2593235.jpg");
+    .stApp {
+        background-image: url("https://wallpaperaccess.com/full/2593235.jpg");
         background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
     .stButton button {
         background-color: #ff69b4 !important;
@@ -54,7 +56,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# App title and instructions
+# Title and Instructions
 st.title("💖 FLAMES Game 💖")
 st.write("**Find out your special connection using the classic FLAMES game.**")
 
